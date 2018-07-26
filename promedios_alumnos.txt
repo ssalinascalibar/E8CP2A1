@@ -1,0 +1,4 @@
+El alumno David promedia 3.6
+El alumno Gonzalo promedia 4.2
+El alumno Mai promedia 7.6
+El alumno JP promedia 10.0

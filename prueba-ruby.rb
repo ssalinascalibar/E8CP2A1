@@ -1,62 +1,33 @@
-file = File.open('notas.csv', 'r')
-notas = file.readlines
-file.close
+def read_file
+    file = File.open('notas.csv', 'r')
+    alumnos = file.readlines.map(&:chomp).map { |ele| ele.split(', ') }
+    file.close
+    return alumnos
+end
+
+
 
 #when 1
-david = notas[0].chomp.split(', ')
-def promedio(name, nombre ) 
-    a = name.shift
-    
-    sum=0
-    name.each do |e|
-        sum += e.to_f
-    end
-    
-    avg = sum / name.length
-    puts "Promedio de #{nombre} es #{avg}"
 
+def read_file
+    file = File.open('notas.csv', 'r')
+    alumnos = file.readlines.map(&:chomp).map { |ele| ele.split(', ') }
+    file.close
+    return alumnos
 end
+alumnos = read_file
 
-gonzalo = notas[1].chomp.split(', ')
-def promedio(name, nombre ) 
-    a = name.shift
-    
-    sum=0
-    name.each do |e|
-        sum += e.to_f
-    end
-    
-    avg = sum / name.length
-    puts "Promedio de #{nombre} es #{avg}"
 
-end
-
-mai = notas[2].chomp.split(', ')
-def promedio(name, nombre ) 
-    a = name.shift
-    
-    sum=0
-    name.each do |e|
-        sum += e.to_f
-    end
-    
-    avg = sum / name.length
-    puts "Promedio de #{nombre} es #{avg}"
-
-end
-
-jp = notas[3].chomp.split(', ')
-def promedio(name, nombre ) 
-    a = name.shift
-    
-    sum=0
-    name.each do |e|
-        sum += e.to_f
-    end
-    
-    avg = sum / name.length
-    puts "Promedio de #{nombre} es #{avg}"
-
+def promedios_tot
+    alumnos = read_file
+    alumnos.each do |alum| 
+      name_alumno = alum.shift
+      suma = alum.inject(0) { |sum, x| sum + x.to_f }
+      average = suma / alum.length 
+      File.open('promedios_alumnos.txt', 'a') { |ele| 
+        ele.puts "El alumno #{name_alumno} promedia #{average}"
+     }
+    end    
 end
 
 #fin when 1
@@ -121,10 +92,7 @@ while opcion < 5 && opcion >= 0
   opcion = gets.chomp.to_i
   case opcion
   when 1
-    promedio(david, "David")
-    promedio(gonzalo, "Gonzalo")
-    promedio(mai, "Mai")
-    promedio(jp, "JP")
+    promedios_tot
 
     puts ''
     main_menu()
